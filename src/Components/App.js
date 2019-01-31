@@ -51,7 +51,16 @@ const style = {
     //background: "linear-gradient(45deg, #ffffff 30%, #e8e8e8 90%)"
     background: 'linear-gradient(45deg, #420c0c 30%, #800808 90%)',
 
-  }
+  },
+  button: {
+    background: "linear-gradient(45deg, #ffffff 30%, #e8e8e8 90%)",
+    borderRadius: 15,
+    border: 0,
+    color: "white",
+    //height: 28,
+    padding: "0 0px"
+    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
 }
 
 const config = {
@@ -172,6 +181,10 @@ constructor(){
     eosPricETH: 0,
     tlosEOS:0.03,
   }
+  this.changeState1a = this.changeState1a.bind(this);
+  this.changeState2a = this.changeState2a.bind(this);
+  this.changeState3a = this.changeState3a.bind(this);
+
   }
   
   componentDidMount() {
@@ -189,11 +202,14 @@ constructor(){
    // CheckAccount(DIVACCOUNTNAME).then(setInterval(this.changeState2a, 2000))
    // CheckAccount(PROACCOUNTNAME).then(setInterval(this.changeState3a, 2000))
 
-    CheckAccount(BPACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState1a, 4000)).then(setTimeout(this.changeState1a, 2000))
-    CheckAccount(DIVACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState2a, 4000)).then(setTimeout(this.changeState2a, 2000))
-    CheckAccount(PROACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState3a, 4000)).then(setTimeout(this.changeState3a, 2000))
+   // CheckAccount(BPACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState1a, 4000)).then(setTimeout(this.changeState1a, 2000))
+   // CheckAccount(DIVACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState2a, 4000)).then(setTimeout(this.changeState2a, 2000))
+   // CheckAccount(PROACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState3a, 4000)).then(setTimeout(this.changeState3a, 2000))
 
-    CheckAccount(ACCOUNTNAME);
+    CheckAccount(BPACCOUNTNAME)
+    CheckAccount(DIVACCOUNTNAME)
+    CheckAccount(PROACCOUNTNAME)
+    CheckAccount(ACCOUNTNAME)
 
     
  //   fetch("https://api.chainrift.com/v1/Public/Market?")
@@ -226,6 +242,65 @@ aspetta = () => {
 console.log("aspettando 2 sec")
 }
 
+  onClick(event) {
+    console.log("1")
+    console.log("2")
+
+    this.changeState1a()
+
+    this.changeState2a()
+    console.log("3")
+
+    this.changeState3a()
+
+  }
+
+caricaTutto = () => {
+  let valore1 = 0
+  BPACCOUNT.refund_request ?
+    valore1 = this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount)
+    // console.log("valore c'è") 
+    : valore1 = 0
+
+  this.setState({
+    bpUnstake: valore1,
+    bpbalance: BPACCOUNT.core_liquid_balance,
+    bpcpu: BPACCOUNT.total_resources.cpu_weight,
+    bpban: BPACCOUNT.total_resources.net_weight,
+    totalbpbalance: this.balance(this.state.bpbalance) + this.balance(this.state.bpcpu) + this.balance(this.state.bpban) + this.balance(this.state.bpUnstake),
+    // bpUnstake: this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount),
+
+  });
+
+  let valore2 = 0
+  DIVACCOUNT.refund_request ? valore2 = this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount) : valore2 = 0
+
+  this.setState({
+    divUnstake: valore2,
+
+    divbalance: DIVACCOUNT.core_liquid_balance,
+    divcpu: DIVACCOUNT.total_resources.cpu_weight,
+    divban: DIVACCOUNT.total_resources.net_weight,
+    totaldivbalance: this.balance(this.state.divbalance) + this.balance(this.state.divcpu) + this.balance(this.state.divban) + this.balance(this.state.divUnstake),
+    // divUnstake: this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount),
+
+  });
+    //console
+
+  let valore3 = 0
+  PROACCOUNT.refund_request ? valore3 = this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount) : valore3 = 0
+
+  this.setState({
+    proUnstake: valore3,
+    probalance: PROACCOUNT.core_liquid_balance,
+    procpu: PROACCOUNT.total_resources.cpu_weight,
+    proban: PROACCOUNT.total_resources.net_weight,
+    totalprobalance: this.balance(this.state.probalance) + this.balance(this.state.procpu) + this.balance(this.state.proban) + this.balance(this.state.proUnstake),
+    // proUnstake: this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount),
+  });
+
+}
+
   changeState1a = ()=> {
     let valore = 0
      BPACCOUNT.refund_request ? 
@@ -234,12 +309,11 @@ console.log("aspettando 2 sec")
     : valore = 0 
    
      this.setState({
-       bpUnstake: valore,
-
+      bpUnstake: valore,
       bpbalance: BPACCOUNT.core_liquid_balance,
       bpcpu: BPACCOUNT.total_resources.cpu_weight,
       bpban: BPACCOUNT.total_resources.net_weight,
-       totalbpbalance: this.balance(this.state.bpbalance) + this.balance(this.state.bpcpu) + this.balance(this.state.bpban) + this.balance(this.state.bpUnstake),
+      totalbpbalance: this.balance(this.state.bpbalance) + this.balance(this.state.bpcpu) + this.balance(this.state.bpban) + this.balance(this.state.bpUnstake),
      // bpUnstake: this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount),
 
     });
@@ -304,7 +378,36 @@ console.log("aspettando 2 sec")
             //borderRadius: 15
           }}
         />
+
+
+       
+
+
+
+
         </div>
+        <div align="center">
+        <Button
+          variant="contained"
+          color="primary"
+          align="center"
+          size="small"
+            fullWidth="true"
+          style={
+            {
+              // ...style.button,
+              position: "relative",
+              textAlign: "center",
+              marginBottom:10,
+              //width:"100%"
+            }
+          }
+          onClick={this.caricaTutto}
+          elevation={5}
+        >LOAD/REFRESH < br/>
+        2 click min
+
+        </Button></div>
         <Grid container spacing={24} direction="row">
           <Grid item xs={6} sm={6}>
 
