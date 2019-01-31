@@ -72,12 +72,13 @@ const config = {
 const eos = Eos(config);
 const BPACCOUNTNAME = "tlosimperabp";
 const DIVACCOUNTNAME = "imperadivids";
-//const PROACCOUNTNAME = "gyytqnbxhage";
+const ACCOUNTNAME = "gyytqnbxhage";
 const PROACCOUNTNAME = "imperareserv";
 
 let BPACCOUNT;
 let DIVACCOUNT;
 let PROACCOUNT;
+let ACCOUNT;
 let BPACTIONS;
 let DIVACTIONS;
 let PROACTIONS;
@@ -99,6 +100,10 @@ function CheckAccount(account): Promise<any> {
       if (account === PROACCOUNTNAME) {
         PROACCOUNT=AccInfo;
         console.log(PROACCOUNT);     
+      }
+      if (account === ACCOUNTNAME) {
+        ACCOUNT=AccInfo;
+        console.log(AccInfo);
       }
     })
       .catch(error => {
@@ -176,13 +181,14 @@ constructor(){
     //setTimeout(this.changeState2, 4000);
     //setTimeout(this.changeState3, 4000);
 
-    setInterval(this.changeState1, 2000);
-    setInterval(this.changeState2, 2000);
-    setInterval(this.changeState3, 2000);
+    setInterval(this.changeState1a, 2000);
+    setInterval(this.changeState2a, 2000);
+    setInterval(this.changeState3a, 2000);
 
     CheckAccount(BPACCOUNTNAME);
     CheckAccount(DIVACCOUNTNAME);
     CheckAccount(PROACCOUNTNAME);
+    CheckAccount(ACCOUNTNAME);
 
     
  //   fetch("https://api.chainrift.com/v1/Public/Market?")
@@ -212,13 +218,18 @@ constructor(){
     };
 
 
-  changeState1 = ()=> {
+  changeState1a = ()=> {
+    let valore = 0
+    { BPACCOUNT.refund_request ? valore = this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount) : valore = 0 }
+
      this.setState({
+       bpUnstake: valore,
+
       bpbalance: BPACCOUNT.core_liquid_balance,
       bpcpu: BPACCOUNT.total_resources.cpu_weight,
       bpban: BPACCOUNT.total_resources.net_weight,
-      totalbpbalance: this.balance(this.state.bpbalance) + this.balance(this.state.bpcpu) + this.balance(this.state.bpban),
-      bpUnstake: this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount),
+       totalbpbalance: this.balance(this.state.bpbalance) + this.balance(this.state.bpcpu) + this.balance(this.state.bpban) + this.balance(this.state.bpUnstake),
+     // bpUnstake: this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount),
 
     });
   }
@@ -227,30 +238,37 @@ constructor(){
     return parseFloat(value);
   }
   
-  changeState2 = () => {
+  changeState2a = () => {
+    let valore = 0
+    { DIVACCOUNT.refund_request ? valore = this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount) : valore = 0 }
+
     this.setState({
+      divUnstake: valore,
+
       divbalance: DIVACCOUNT.core_liquid_balance,
       divcpu: DIVACCOUNT.total_resources.cpu_weight,
       divban: DIVACCOUNT.total_resources.net_weight,
-      totaldivbalance: this.balance(this.state.divbalance) + this.balance(this.state.divcpu) + this.balance(this.state.divban),
-      divUnstake: this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount),
+      totaldivbalance: this.balance(this.state.divbalance) + this.balance(this.state.divcpu) + this.balance(this.state.divban) + this.balance(this.state.divUnstake),
+     // divUnstake: this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount),
 
     });
     //console.log(this.state.totaldivbalance)
 
   }
 
-  changeState3 = () => {
+  changeState3a = () => {
+    let valore = 0
+    { PROACCOUNT.refund_request ? valore = this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount) : valore=0}
+
     this.setState({
+      proUnstake: valore,
       probalance: PROACCOUNT.core_liquid_balance,
       procpu: PROACCOUNT.total_resources.cpu_weight,
       proban: PROACCOUNT.total_resources.net_weight,
-      totalprobalance: this.balance(this.state.probalance) + this.balance(this.state.procpu) + this.balance(this.state.proban),
-      proUnstake: this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount),
-
+      totalprobalance: this.balance(this.state.probalance) + this.balance(this.state.procpu) + this.balance(this.state.proban) + this.balance(this.state.proUnstake),
+     // proUnstake: this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount),
     });
 
-    //console.log(PROACCOUNT.refund_request.net_amount)
 
   }
 
