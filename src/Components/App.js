@@ -181,13 +181,18 @@ constructor(){
     //setTimeout(this.changeState2, 4000);
     //setTimeout(this.changeState3, 4000);
 
-    setInterval(this.changeState1a, 2000);
-    setInterval(this.changeState2a, 2000);
-    setInterval(this.changeState3a, 2000);
+    //setInterval(this.changeState1a, 2000);
+    //setInterval(this.changeState2a, 2000);
+    //setInterval(this.changeState3a, 2000);
 
-    CheckAccount(BPACCOUNTNAME);
-    CheckAccount(DIVACCOUNTNAME);
-    CheckAccount(PROACCOUNTNAME);
+   // CheckAccount(BPACCOUNTNAME).then(setInterval(this.changeState1a, 2000))
+   // CheckAccount(DIVACCOUNTNAME).then(setInterval(this.changeState2a, 2000))
+   // CheckAccount(PROACCOUNTNAME).then(setInterval(this.changeState3a, 2000))
+
+    CheckAccount(BPACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState1a, 4000)).then(setTimeout(this.changeState1a, 2000))
+    CheckAccount(DIVACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState2a, 4000)).then(setTimeout(this.changeState2a, 2000))
+    CheckAccount(PROACCOUNTNAME).then(setTimeout(this.aspetta, 2000)).then(setTimeout(this.changeState3a, 4000)).then(setTimeout(this.changeState3a, 2000))
+
     CheckAccount(ACCOUNTNAME);
 
     
@@ -217,11 +222,17 @@ constructor(){
 
     };
 
+aspetta = () => {
+console.log("aspettando 2 sec")
+}
 
   changeState1a = ()=> {
     let valore = 0
-    { BPACCOUNT.refund_request ? valore = this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount) : valore = 0 }
-
+     BPACCOUNT.refund_request ? 
+    valore = this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount)
+   // console.log("valore c'è") 
+    : valore = 0 
+   
      this.setState({
        bpUnstake: valore,
 
@@ -240,7 +251,7 @@ constructor(){
   
   changeState2a = () => {
     let valore = 0
-    { DIVACCOUNT.refund_request ? valore = this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount) : valore = 0 }
+     DIVACCOUNT.refund_request ? valore = this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount) : valore = 0 
 
     this.setState({
       divUnstake: valore,
@@ -258,7 +269,7 @@ constructor(){
 
   changeState3a = () => {
     let valore = 0
-    { PROACCOUNT.refund_request ? valore = this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount) : valore=0}
+     PROACCOUNT.refund_request ? valore = this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount) : valore=0
 
     this.setState({
       proUnstake: valore,
@@ -268,6 +279,8 @@ constructor(){
       totalprobalance: this.balance(this.state.probalance) + this.balance(this.state.procpu) + this.balance(this.state.proban) + this.balance(this.state.proUnstake),
      // proUnstake: this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount),
     });
+
+ 
 
 
   }
