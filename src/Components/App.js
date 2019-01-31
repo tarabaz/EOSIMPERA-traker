@@ -289,19 +289,22 @@ console.log("aspettando 2 sec")
   render() {
     return(
     <div>
+<div align="center">
 
         <img
-          src="/images/htmlheadmail.png"
+          src="/images/htmlheadmail.png" align="center"
           style={{
             // marginLeft: '-10px',
             position: "relative",
             //flexGrow: 1,
-            width: "100%",
+            
+            width: "50%",
 
             //margin: '0px',
             //borderRadius: 15
           }}
         />
+        </div>
         <Grid container spacing={24} direction="row">
           <Grid item xs={6} sm={6}>
 
