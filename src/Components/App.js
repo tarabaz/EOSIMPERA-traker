@@ -392,7 +392,7 @@ caricaTutto = () => {
           color="primary"
           align="center"
           size="small"
-            fullWidth="true"
+            fullWidth
           style={
             {
               // ...style.button,
