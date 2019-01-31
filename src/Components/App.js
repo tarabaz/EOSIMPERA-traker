@@ -8,14 +8,10 @@ import Eos from "eosjs";
 
 import {
   Button,
-  AppBar,
   Typography,
-  Toolbar,
   Paper,
   Grid,
-  Divider,
   // TextField,
-  Table
 } from "@material-ui/core";
 
 global.fetch = require('node-fetch')
@@ -87,11 +83,11 @@ const PROACCOUNTNAME = "imperareserv";
 let BPACCOUNT;
 let DIVACCOUNT;
 let PROACCOUNT;
-let ACCOUNT;
-let BPACTIONS;
-let DIVACTIONS;
-let PROACTIONS;
-let TELOSPRICE;
+//let ACCOUNT;
+//let BPACTIONS;
+//let DIVACTIONS;
+//let PROACTIONS;
+//let TELOSPRICE;
 
 function CheckAccount(account): Promise<any> {
 //console.log(account);
@@ -120,17 +116,8 @@ function CheckAccount(account): Promise<any> {
       });
   })
 }
-function CheckAction2(account): Promise<any> {
 
-  return new Promise((resolve: any) => {
-    console.log("ciao")
-
-    eos.getActions("tlosimperabp").then(console.log)
-
-
-  })
-}
-
+/*
 function CheckAction(account): Promise<any> {
   return new Promise((resolve: any) => {
 console.log(account + "  actions")
@@ -155,7 +142,7 @@ console.log(account + "  actions")
       });
   })
 }
-
+*/
 class App extends React.Component {
 constructor(){
   super();
