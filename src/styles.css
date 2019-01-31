@@ -1,0 +1,9 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+body {
+background-color: #FE6B8B;
+background-image: linear-gradient(to right, #ffffff , rgb(243, 234, 205))
+}
