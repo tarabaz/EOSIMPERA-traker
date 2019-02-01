@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@material-ui/core": "3.9.0",
+    "axios": "0.18.0",
     "coingecko-api": "1.0.3",
     "coinmarketcap-api": "3.0.0",
     "cryptocompare": "0.7.2",
@@ -14,7 +15,9 @@
     "react-async": "3.12.1",
     "react-dom": "16.5.2",
     "react-number-format": "4.0.6",
-    "react-scripts": "2.0.3"
+    "react-scripts": "2.0.3",
+    "request": "2.88.0",
+    "request-promise": "4.2.2"
   },
   "devDependencies": {},
   "scripts": {
