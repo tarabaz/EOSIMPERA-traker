@@ -565,8 +565,8 @@ console.log("aspettando 2 sec")
 
         </Grid>
 
-        <Grid container spacing={24} direction="row">
-          <Grid item xs={12} sm={6}>
+        <Grid container spacing={24} direction="row"  >
+          <Grid item xs={12} sm={6} >
 
             <Paper
               style={{
@@ -576,10 +576,15 @@ console.log("aspettando 2 sec")
               }}
               elevation={10}
             >
+              <Typography variant="headline" variant="h6">
+                <strong>Block Producer Stats</strong>
+              </Typography>
+              <hr style={{ height: 1 }} />
 
-              <Typography component="p" align="center" style={{
+              <Typography component="p" align="center"  style={{
                 color: "black",
                 topMargin: -10,
+                
               }}>
                 Lifetime Produced Block: <strong> {this.state.bpBlockProduced} </strong><br />
                 Missed Block per Rotation: <strong> {this.state.bpMissedBlockRotation } </strong><br />
@@ -602,7 +607,7 @@ console.log("aspettando 2 sec")
               }}
               elevation={10}
             >
-              <Typography variant="headline" variant="">
+              <Typography variant="headline" variant="body1">
                 <strong>Dividendi</strong> 
               </Typography>
               <Typography variant="headline" variant="caption">
