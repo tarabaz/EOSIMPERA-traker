@@ -11,6 +11,8 @@
     "coinmarketcap-api": "3.0.0",
     "cryptocompare": "0.7.2",
     "eosjs": "16.0.9",
+    "mobx-react": "5.4.3",
+    "mobx-react-router": "4.0.5",
     "react": "16.5.2",
     "react-async": "3.12.1",
     "react-dom": "16.5.2",
