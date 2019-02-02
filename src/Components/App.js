@@ -5,17 +5,11 @@ import React from "react";
 import Eos from "eosjs";
 import axios from "axios";
 
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-
 import {
-  Button,
   Typography,
   Paper,
-  Grid,
-  Table
+  Grid
+
   // TextField,
 } from "@material-ui/core";
 
@@ -74,8 +68,8 @@ const config = {
   // chainId: '038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca',
   //keyProvider: [wif],
   //httpEndpoint: "https://telos.eos.barcelona",
-  httpEndpoint: "https://api.eosimpera.com/",
-  //httpEndpoint: "https://api.eos.miami",
+  //httpEndpoint: "https://api.eosimpera.com/",
+  httpEndpoint: "https://api.eos.miami",
   //httpEndpoint: "https://api.eosimpera.com/",
   // httpEndpoint: 'http://jungle.cryptolions.io:18888',
   // TODO: changeable https://api.eosnewyork.io https://nodes.get-scatter.com https://api1.eosasia.one
