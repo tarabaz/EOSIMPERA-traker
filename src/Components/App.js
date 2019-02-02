@@ -3,9 +3,7 @@ import React from "react";
 //import { CheckAccount} from "./EosCore";
 
 import Eos from "eosjs";
-import {prezzi} from "./coinmarketcap"
-import axios from 'axios';
-
+import axios from "axios";
 
 
 import {
@@ -17,15 +15,9 @@ import {
 } from "@material-ui/core";
 
 
-
-    
-
-
 global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 cc.setApiKey('3e6a2ba71dddbb9996848462b47c2e7b736fb5ce67d546dc791f5e9baa873b00')
-
-
 
 
 const style = {
@@ -37,7 +29,7 @@ const style = {
     height: 50,
     boxShadow: "0 3px 10  px 5px rgba(0, 0, 0, .3)"
   },
-  Paper:{
+  Paper: {
     borderRadius: 15,
     //marginTop: 15,
     padding: "15px 15px",
@@ -70,7 +62,7 @@ const style = {
     padding: "10px 10px",
     textAlign: "center",
     background: "linear-gradient(45deg, #ffc714 30%, #de4320 90%)",
-   // background: 'linear-gradient(45deg, #420c0c 30%, #800808 90%)',
+    // background: 'linear-gradient(45deg, #420c0c 30%, #800808 90%)',
 
   }
 }
@@ -81,11 +73,11 @@ const config = {
   //keyProvider: [wif],
   //httpEndpoint: "https://telos.eos.barcelona", 
   httpEndpoint: "https://api.eosimpera.com/",
-     // httpEndpoint: 'http://jungle.cryptolions.io:18888',
+  // httpEndpoint: 'http://jungle.cryptolions.io:18888',
   // TODO: changeable https://api.eosnewyork.io https://nodes.get-scatter.com https://api1.eosasia.one
   expireInSeconds: 60,
   broadcast: true,
-  verbose: false, 
+  verbose: false,
   sign: true
 };
 
@@ -101,31 +93,32 @@ let DIVACCOUNT;
 let PROACCOUNT;
 let ACCOUNT;
 let BPLIST;
+let TELOS=0;
 //let BPACTIONS;
 //let DIVACTIONS;
 //let PROACTIONS;
 //let TELOSPRICE;
 
 function CheckAccount(account): Promise<any> {
-//console.log(account);
+  //console.log(account);
   return new Promise((resolve: any) => {
     eos.getAccount(account).then(AccInfo => {
       //console.log(AccInfo)
       if (account === BPACCOUNTNAME) {
-        BPACCOUNT=AccInfo;
-      //  console.log(BPACCOUNT);
+        BPACCOUNT = AccInfo;
+        //  console.log(BPACCOUNT);
       }
       if (account === DIVACCOUNTNAME) {
-        DIVACCOUNT=AccInfo;
-      //          console.log(DIVACCOUNT);
+        DIVACCOUNT = AccInfo;
+        //          console.log(DIVACCOUNT);
       }
       if (account === PROACCOUNTNAME) {
-        PROACCOUNT=AccInfo;
-     //   console.log(PROACCOUNT);     
+        PROACCOUNT = AccInfo;
+        //   console.log(PROACCOUNT);     
       }
       if (account === ACCOUNTNAME) {
-        ACCOUNT=AccInfo;
-        console.log(AccInfo);
+        ACCOUNT = AccInfo;
+        //console.log(AccInfo);
       }
     })
       .catch(error => {
@@ -160,54 +153,128 @@ console.log(account + "  actions")
   })
 }
 */
+
+function CheckPrise(): Promise<any> {
+  return new Promise((resolve: any) => {
+    let webLink = "http://api.chainrift.com/v1/Public/GetPairStats?"
+    fetch(webLink)
+    .then(res => {
+      return res.json();
+      })
+      .then(dati => {
+        const risultato = dati.data
+        console.log(risultato)
+
+      })
+    
+  })
+}
+
+function prise(): Promise<any>{
+  console.log("inizio")
+return new Promise((resolve:any) =>{
+  const response = fetch('https://api.coingecko.com/api/v3/coins/telos/tickers')
+  .then(data => {
+    console.log(response)
+
+    response.json()
+    })
+  console.log(response)
+
+
+}).catch(error => {
+  console.error(error);
+});
+
+}
+
+
 class App extends React.Component {
-constructor(){
-  super();
-  this.state ={
-    bpbalance:"0",
-    divbalance:"0",
-    probalance:"0",
-    bpcpu:"0",
-    divcpu:"0",
-    procpu:"0",
-    bpban:"0",
-    divban:"0",
-    proban:"0",
-    bpUnstake:"0",
-    divUnstake:0,
-    proUnstake:0,
-    totalbpbalance:0,
-    totaldivbalance:0,
-    totalprobalance:0,
-    eosPriceUSD:0,
-    eosPriceEUR: 0,
-    eosPriceBTC: 0,
-    eosPricETH: 0,
-    tlosEOS:0.03,
-    bpPosition:"-",
-    totalDivids:"",
-    totalTelosDivids:"",
-    bpBlockProduced:"",
-    bpMissedBlock:"",
-    bpMissedBlockRotation:"",
-    bpVotes:0,
-    bpUnpaid:"",
-    totalTelosDivids: 0,
+  constructor() {
+    super();
+    this.state = {
+      bpbalance: "0",
+      divbalance: "0",
+      probalance: "0",
+      bpcpu: "0",
+      divcpu: "0",
+      procpu: "0",
+      bpban: "0",
+      divban: "0",
+      proban: "0",
+      bpUnstake: "0",
+      divUnstake: 0,
+      proUnstake: 0,
+      totalbpbalance: 0,
+      totaldivbalance: 0,
+      totalprobalance: 0,
+      eosPriceUSD: 0,
+      eosPriceEUR: 0,
+      eosPriceBTC: 0,
+      eosPricETH: 0,
+      tlosEOS: 0,
+      bpPosition: "-",
+      totalDivids: "",
+      totalTelosDivids: "",
+      bpBlockProduced: "",
+      bpMissedBlock: "",
+      bpMissedBlockRotation: "",
+      bpVotes: 0,
+      bpUnpaid: "",
+      totalTelosDivids: 0,
+      data:null,
+      metadata: [],
+      tlosTickers:[],
+    }
 
-    metadata: [],
+
   }
 
 
-  }
-  
+
   componentDidMount() {
-
-
     CheckAccount(ACCOUNTNAME)
-////////////////////////////////////////////////////////////////////////////U
+    ////////////////////////////////////////////////////////////////////////////U
 
+    //const datiprezzo = fetch('https://api.chainrift.com/v1/Public/GetPairStats?')
+   
+   
+    axios.get("https://api.coingecko.com/api/v3/coins/telos/tickers.json")
+    .then(res =>{
+      this.setState({
+        tlosTickers: res.data.tickers,
+tlosEOS: res.data.tickers[0].last,
+      })
+      console.log(this.state.tlosTickers)
+     // console.log(this.state.tlosTickers.length)
+      for (var i = 0; i < this.state.tlosTickers.length; i++) {
+        if (this.state.tlosTickers[i].target === "EOS") {
+          
+          TELOS = parseFloat(this.state.tlosTickers[i].last)
+          console.log(TELOS)
+
+         // console.log(this.state.tlosTickers[i].last)
+/*
+          this.setstate({
+            tlosEOS: TELOS,
+          })
+*/
+        }else{
+        }
+      }
+    })
+
+
+    //xhttp.open("get", "https://api.livecoin.net/exchange/ticker?currencyPair=BTC/USD", true);
+ /*
+
+   this.setState({
+        tlosEOS:dati,
+      })
+
+*/
     eos.getAccount(BPACCOUNTNAME).then(AccInfo => {
-        BPACCOUNT = AccInfo;
+      BPACCOUNT = AccInfo;
       let valore1 = 0
       BPACCOUNT.refund_request ?
         valore1 = this.balance(BPACCOUNT.refund_request.net_amount) + this.balance(BPACCOUNT.refund_request.cpu_amount)
@@ -232,10 +299,10 @@ constructor(){
 
     eos.getAccount(DIVACCOUNTNAME).then(AccInfo => {
 
-      
-    
-        DIVACCOUNT = AccInfo;
-        //          console.log(DIVACCOUNT);
+
+
+      DIVACCOUNT = AccInfo;
+      //          console.log(DIVACCOUNT);
       let valore = 0
       DIVACCOUNT.refund_request ? valore = this.balance(DIVACCOUNT.refund_request.net_amount) + this.balance(DIVACCOUNT.refund_request.cpu_amount) : valore = 0
 
@@ -262,7 +329,7 @@ constructor(){
     eos.getAccount(PROACCOUNTNAME).then(AccInfo => {
       //console.log(AccInfo)
 
-        PROACCOUNT = AccInfo;
+      PROACCOUNT = AccInfo;
       let valore = 0
       PROACCOUNT.refund_request ? valore = this.balance(PROACCOUNT.refund_request.net_amount) + this.balance(PROACCOUNT.refund_request.cpu_amount) : valore = 0
 
@@ -283,17 +350,17 @@ constructor(){
       .catch(error => {
         console.error(error);
       });
-   
 
-//////////////////////////////////////////////////////////////////////////////
-    
- //   fetch("https://api.chainrift.com/v1/Public/Market?")
- //     .then(results => {
- //       return results.json();
- //     }).then(data =>{
- //       console.log(data)
- //     })
-    cc.price('EOS', ['USD', 'EUR','BTC','ETH'])
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    //   fetch("https://api.chainrift.com/v1/Public/Market?")
+    //     .then(results => {
+    //       return results.json();
+    //     }).then(data =>{
+    //       console.log(data)
+    //     })
+    cc.price('EOS', ['USD', 'EUR', 'BTC', 'ETH'])
       .then(prices => {
         //console.log(prices)
         this.setState({
@@ -302,88 +369,91 @@ constructor(){
           eosPriceETH: prices.ETH,
           eosPriceEUR: prices.EUR
         })
-        // -> { USD: 1100.24, EUR: 1039.63 }s
-       // console.log(this.state.eosPriceEUR)
-       // console.log(this.state.eosPriceUSD)
+
       })
       .catch(console.error)
 
 
-  /*
-    axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=6d18f57f-0ba0-40e6-8c93-3686ea23fa56')
-      .then(res => {
-        console.log(res.data)
-        const persons = res.data
-        this.setState = ({
-          metadata: persons,
+    /*
+      axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=6d18f57f-0ba0-40e6-8c93-3686ea23fa56')
+        .then(res => {
+          console.log(res.data)
+          const persons = res.data
+          this.setState = ({
+            metadata: persons,
+          })
         })
-      })
-
-
-*/
+  
+  
+  */
 
     eos.getProducers({ json: true, limit: 500 }).then(lista => {
       //console.log(lista);
       BPLIST = lista;
-      console.log(BPLIST);
-      
+      //console.log(BPLIST);
 
-      for (var i =0; i < 40; i++) {
+
+      for (var i = 0; i < 40; i++) {
         let bp = BPLIST.rows[i].owner
         if (bp === "tlosimperabp") {
-          console.log(bp)
-          console.log(BPLIST.rows[i]);
+         // console.log(bp)
+         // console.log(BPLIST.rows[i]);
           let vot = parseFloat(BPLIST.rows[i].total_votes)
-              this.setState({
-            bpPosition:i+1,
-                bpBlockProduced: BPLIST.rows[i].lifetime_produced_blocks ,
-                bpMissedBlock: BPLIST.rows[i].lifetime_missed_blocks ,
-                bpMissedBlockRotation: BPLIST.rows[i].missed_blocks_per_rotation ,
-                bpVotes: vot.toFixed(0) ,
-                bpUnpaid: BPLIST.rows[i].unpaid_blocks,
+          this.setState({
+            bpPosition: i + 1,
+            bpBlockProduced: BPLIST.rows[i].lifetime_produced_blocks,
+            bpMissedBlock: BPLIST.rows[i].lifetime_missed_blocks,
+            bpMissedBlockRotation: BPLIST.rows[i].missed_blocks_per_rotation,
+            bpVotes: vot.toFixed(0),
+            bpUnpaid: BPLIST.rows[i].unpaid_blocks,
           })
-}
-
-}
-
+        }
+      }
     })
-    };
+//////////////////////////////////////////////////TEST TX
 
-aspetta = () => {
-console.log("aspettando 2 sec")
-}
 
- 
+
+//////////////////////////////////////////////////TEST TX FINE
+
+
+  };
+
+  aspetta = () => {
+    console.log("aspettando 2 sec")
+  }
+
+
 
   balance = (value) => {
     return parseFloat(value);
   }
-  
- 
 
 
-  
+
+
+
   render() {
-    return(
-    <div>
-<div align="center">
+    return (
+      <div>
+        <div align="center">
 
-        <img
-          src="/images/htmlheadmail.png" align="center"
-          style={{
-            // marginLeft: '-10px',
-            position: "relative",
-            //flexGrow: 1,
-            
-            width: "50%",
+          <img
+            src="/images/htmlheadmail.png" align="center"
+            style={{
+              // marginLeft: '-10px',
+              position: "relative",
+              //flexGrow: 1,
 
-            //margin: '0px',
-            //borderRadius: 15
-          }}
-        />
+              width: "50%",
+
+              //margin: '0px',
+              //borderRadius: 15
+            }}
+          />
 
 
-       
+
 
 
 
@@ -401,13 +471,13 @@ console.log("aspettando 2 sec")
               }}
               elevation={10}
             >
-              
-              <Typography component="p" align="left"  style={{
+
+              <Typography component="p" align="left" style={{
                 color: "white",
                 topMargin: -10,
               }}>
-                EOS/USD: <strong> {this.state.eosPriceUSD}$</strong><br/>
-                TLOS/EOS: <strong> {this.state.tlosEOS} </strong><br />
+                EOS/USD: <strong> {this.state.eosPriceUSD}$</strong><br />
+                TLOS/EOS: <strong> {(this.state.tlosEOS).toFixed(4)} </strong><br />
                 TLOS/USD: <strong> {(this.state.eosPriceUSD * this.state.tlosEOS).toFixed(3)}$</strong><br />
               </Typography>
             </Paper>
@@ -424,45 +494,45 @@ console.log("aspettando 2 sec")
               elevation={10}
             >
 
-              <Typography component="p" align="left"  style={{
+              <Typography component="p" align="left" style={{
                 color: "white",
                 topMargin: -10,
-                            }}>
+              }}>
                 EOS/USD: <strong> {this.state.eosPriceEUR}€</strong><br />
-                TLOS/EOS: <strong> {this.state.tlosEOS}  </strong><br />
-                TLOS/USD: <strong> {(this.state.tlosEOS * this.state.eosPriceEUR).toFixed(3)}€</strong><br />              
-                </Typography>
+                TLOS/EOS: <strong> {(this.state.tlosEOS).toFixed(4)}  </strong><br />
+                TLOS/USD: <strong> {(this.state.tlosEOS * this.state.eosPriceEUR).toFixed(3)}€</strong><br />
+              </Typography>
             </Paper>
           </Grid>
 
 
-          </Grid>
-       
+        </Grid>
+
 
 
 
         <Grid container spacing={24} direction="row">
           <Grid item xs={12} sm={4}>
 
-        <Paper
-          style={{
-            ...style.Paper,
-            topMargin:10,
-          //  height: 320
-          }}
-          elevation={10}
-        >
+            <Paper
+              style={{
+                ...style.Paper,
+                topMargin: 10,
+                //  height: 320
+              }}
+              elevation={10}
+            >
               <Typography variant="caption">
-             Account:
+                Account:
               </Typography>
               <Typography variant="headline" variant="h6">
                 {(BPACCOUNTNAME).toUpperCase()}
-          </Typography>
-          <Typography component="p">
+              </Typography>
+              <Typography component="p">
                 Liquid:  <strong>{this.state.bpbalance}</strong><br />
                 Staked CPU:  <strong>{this.state.bpcpu}</strong><br />
                 Staked BAN: <strong> {this.state.bpban}</strong><br />
-                  </Typography>
+              </Typography>
               <Typography variant="caption">
                 Unstake:  <strong> {this.state.bpUnstake}</strong> TLOS
               </Typography>
@@ -479,30 +549,30 @@ console.log("aspettando 2 sec")
               <Typography variant="headline" variant="caption">
                 <strong>{((this.state.totalbpbalance * this.state.tlosEOS) * this.state.eosPriceUSD).toFixed(2)}</strong> $ - <strong>{((this.state.totalbpbalance * this.state.tlosEOS) * this.state.eosPriceEUR).toFixed(2)}</strong> €
               </Typography>
-        </Paper>
-        </Grid>
+            </Paper>
+          </Grid>
           <Grid item xs={12} sm={4}>
 
-        <Paper
-          style={{
-            ...style.Paper,
-            //  height: 320
-            topMargin: 10,
+            <Paper
+              style={{
+                ...style.Paper,
+                //  height: 320
+                topMargin: 10,
 
-          }}
-          elevation={10}
-        >
+              }}
+              elevation={10}
+            >
               <Typography variant="caption">
-                 Account:
+                Account:
               </Typography>
               <Typography variant="headline" variant="h6">
                 {(DIVACCOUNTNAME).toUpperCase()}
-          </Typography>
-          <Typography component="p">
-               Liquid: <strong> {this.state.divbalance}</strong><br />
+              </Typography>
+              <Typography component="p">
+                Liquid: <strong> {this.state.divbalance}</strong><br />
                 Staked CPU: <strong> {this.state.divcpu}</strong><br />
                 Staked BAN: <strong>{this.state.divban}</strong><br />
-          </Typography>
+              </Typography>
               <Typography variant="caption">
                 Unstake:  <strong> {this.state.divUnstake}</strong> TLOS
               </Typography>
@@ -519,38 +589,38 @@ console.log("aspettando 2 sec")
               <Typography variant="headline" variant="caption">
                 <strong>{((this.state.totaldivbalance * this.state.tlosEOS) * this.state.eosPriceUSD).toFixed(2)}</strong> $ - <strong>{((this.state.totaldivbalance * this.state.tlosEOS) * this.state.eosPriceEUR).toFixed(2)}</strong> €
               </Typography>
-        </Paper>
+            </Paper>
           </Grid>
 
-            <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
 
-        <Paper
-          style={{
-            ...style.Paper,
-            //  height: 320
-            topMargin: 10,
+            <Paper
+              style={{
+                ...style.Paper,
+                //  height: 320
+                topMargin: 10,
 
-          }}
-          elevation={10}
-        >
+              }}
+              elevation={10}
+            >
               <Typography variant="caption">
                 Account:
               </Typography>
               <Typography variant="headline" variant="h6">
                 {(PROACCOUNTNAME).toUpperCase()}
-          </Typography>
-          <Typography component="p">
+              </Typography>
+              <Typography component="p">
                 Liquid: <strong> {this.state.probalance}</strong><br />
-            Staked CPU:  <strong>{this.state.procpu}</strong><br />
+                Staked CPU:  <strong>{this.state.procpu}</strong><br />
                 Staked BAN:  <strong>{this.state.proban}</strong><br />
-          </Typography>
+              </Typography>
               <Typography variant="caption">
                 Unstake:  <strong> {this.state.proUnstake}</strong> TLOS
               </Typography>
               <hr
                 style={{
-             //     color: red,
-             //     backgroundColor: color,
+                  //     color: red,
+                  //     backgroundColor: color,
                   height: 1
                 }}
               />
@@ -560,7 +630,7 @@ console.log("aspettando 2 sec")
               <Typography variant="headline" variant="caption">
                 <strong>{((this.state.totalprobalance * this.state.tlosEOS) * this.state.eosPriceUSD).toFixed(2)}</strong> $ - <strong>{((this.state.totalprobalance * this.state.tlosEOS) * this.state.eosPriceEUR).toFixed(2)}</strong> €
               </Typography>
-        </Paper>
+            </Paper>
           </Grid>
 
         </Grid>
@@ -581,17 +651,17 @@ console.log("aspettando 2 sec")
               </Typography>
               <hr style={{ height: 1 }} />
 
-              <Typography component="p" align="center"  style={{
+              <Typography component="p" align="center" style={{
                 color: "black",
                 topMargin: -10,
-                
+
               }}>
                 Lifetime Produced Block: <strong> {this.state.bpBlockProduced} </strong><br />
-                Missed Block per Rotation: <strong> {this.state.bpMissedBlockRotation } </strong><br />
+                Missed Block per Rotation: <strong> {this.state.bpMissedBlockRotation} </strong><br />
                 Lifetime Missed Block: <strong> {this.state.bpMissedBlock} </strong><br />
                 Votes: <strong> {this.state.bpVotes} </strong><br />
                 Position: <strong> {this.state.bpPosition}° </strong><br />
-                Unpaid Block: <strong> {this.state.bpUnpaid } </strong><br />
+                Unpaid Block: <strong> {this.state.bpUnpaid} </strong><br />
 
               </Typography>
             </Paper>
@@ -608,12 +678,12 @@ console.log("aspettando 2 sec")
               elevation={10}
             >
               <Typography variant="headline" variant="body1">
-                <strong>Dividendi</strong> 
+                <strong>Dividendi</strong>
               </Typography>
               <Typography variant="headline" variant="caption">
                 I dividendi sono calcolati sul totale diviso 7
               </Typography>
-              <hr style={{ height: 1}}/>
+              <hr style={{ height: 1 }} />
               <Typography variant="headline" variant="caption">
                 Dividendi del wallet IMPERADIVIDS
               </Typography>
@@ -621,8 +691,8 @@ console.log("aspettando 2 sec")
                 color: "black",
                 topMargin: -10,
               }}>
-              TELOS: <strong> {(this.state.totaldivbalance/7).toFixed(4)} </strong><br />
-               </Typography>
+                TELOS: <strong> {(this.state.totaldivbalance / 7).toFixed(4)} </strong><br />
+              </Typography>
               <Typography variant="headline" variant="caption">
                 USD: {((this.state.totaldivbalance / 7).toFixed(4) * this.state.tlosEOS * this.state.eosPriceUSD).toFixed(2)}$  - EUR: {((this.state.totaldivbalance / 7).toFixed(4) * this.state.tlosEOS * this.state.eosPriceEUR).toFixed(2)}€
               </Typography>
@@ -634,7 +704,7 @@ console.log("aspettando 2 sec")
                 color: "black",
                 topMargin: -10,
               }}>
-                TELOS: <strong> {((this.state.totaldivbalance + this.state.totalbpbalance )/ 7).toFixed(4)} </strong><br />
+                TELOS: <strong> {((this.state.totaldivbalance + this.state.totalbpbalance) / 7).toFixed(4)} </strong><br />
               </Typography>
               <Typography variant="headline" variant="caption">
                 USD: {(((this.state.totaldivbalance + this.state.totalbpbalance) / 7).toFixed(4) * this.state.tlosEOS * this.state.eosPriceUSD).toFixed(2)}$  - EUR: {(((this.state.totaldivbalance + this.state.totalbpbalance) / 7).toFixed(4) * this.state.tlosEOS * this.state.eosPriceEUR).toFixed(2)}€
@@ -681,9 +751,10 @@ console.log("aspettando 2 sec")
 
 
         </Grid>
-        
+
       </div>
 
-    )}
+    )
+  }
 };
 export default App;
