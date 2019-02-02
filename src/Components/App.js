@@ -152,7 +152,7 @@ console.log(account + "  actions")
   })
 }
 */
-
+/*
 function CheckPrise(): Promise<any> {
   return new Promise((resolve: any) => {
     let webLink = "http://api.chainrift.com/v1/Public/GetPairStats?";
@@ -182,7 +182,7 @@ function prise(): Promise<any> {
     console.error(error);
   });
 }
-
+*/
 class App extends React.Component {
   constructor() {
     super();
@@ -215,7 +215,6 @@ class App extends React.Component {
       bpMissedBlockRotation: "",
       bpVotes: 0,
       bpUnpaid: "",
-      totalTelosDivids: 0,
       data: null,
       metadata: [],
       tlosTickers: [],
@@ -553,6 +552,7 @@ class App extends React.Component {
           <img
             src="/images/htmlheadmail.png"
             align="center"
+            alt="loading"
             style={{
               // marginLeft: '-10px',
               position: "relative",
@@ -641,7 +641,7 @@ class App extends React.Component {
               elevation={10}
             >
               <Typography variant="caption">Account:</Typography>
-              <Typography variant="headline" variant="h6">
+              <Typography variant="h6">
                 {BPACCOUNTNAME.toUpperCase()}
               </Typography>
               <Typography component="p">
@@ -662,10 +662,10 @@ class App extends React.Component {
                   height: 1
                 }}
               />
-              <Typography variant="headline" variant="h6">
-                <strong>{this.state.totalbpbalance}</strong> Telos
+              <Typography variant="h6">
+                <strong>{this.state.totalbpbalance.toFixed(4)}</strong> Telos
               </Typography>
-              <Typography variant="headline" variant="caption">
+              <Typography variant="caption">
                 <strong>
                   {(
                     this.state.totalbpbalance *
@@ -695,7 +695,7 @@ class App extends React.Component {
               elevation={10}
             >
               <Typography variant="caption">Account:</Typography>
-              <Typography variant="headline" variant="h6">
+              <Typography variant="h6">
                 {DIVACCOUNTNAME.toUpperCase()}
               </Typography>
               <Typography component="p">
@@ -716,10 +716,10 @@ class App extends React.Component {
                   height: 1
                 }}
               />
-              <Typography variant="headline" variant="h6">
-                <strong>{this.state.totaldivbalance}</strong> Telos
+              <Typography variant="h6">
+                <strong>{this.state.totaldivbalance.toFixed(4)}</strong> Telos
               </Typography>
-              <Typography variant="headline" variant="caption">
+              <Typography variant="caption">
                 <strong>
                   {(
                     this.state.totaldivbalance *
@@ -750,7 +750,7 @@ class App extends React.Component {
               elevation={10}
             >
               <Typography variant="caption">Account:</Typography>
-              <Typography variant="headline" variant="h6">
+              <Typography variant="h6">
                 {PROACCOUNTNAME.toUpperCase()}
               </Typography>
               <Typography component="p">
@@ -771,10 +771,10 @@ class App extends React.Component {
                   height: 1
                 }}
               />
-              <Typography variant="headline" variant="h6">
-                <strong>{this.state.totalprobalance}</strong> Telos
+              <Typography variant="h6">
+                <strong>{this.state.totalprobalance.toFixed(4)}</strong> Telos
               </Typography>
-              <Typography variant="headline" variant="caption">
+              <Typography variant="caption">
                 <strong>
                   {(
                     this.state.totalprobalance *
@@ -806,7 +806,7 @@ class App extends React.Component {
               }}
               elevation={10}
             >
-              <Typography variant="headline" variant="h6">
+              <Typography variant="h6">
                 <strong>Block Producer Stats</strong>
               </Typography>
               <hr style={{ height: 1 }} />
@@ -847,14 +847,14 @@ class App extends React.Component {
               }}
               elevation={10}
             >
-              <Typography variant="headline" variant="body1">
+              <Typography variant="body1">
                 <strong>Dividendi</strong>
               </Typography>
-              <Typography variant="headline" variant="caption">
+              <Typography variant="caption">
                 I dividendi sono calcolati sul totale diviso 7
               </Typography>
               <hr style={{ height: 1 }} />
-              <Typography variant="headline" variant="caption">
+              <Typography v variant="caption">
                 Dividendi del wallet IMPERADIVIDS
               </Typography>
               <Typography
@@ -869,7 +869,7 @@ class App extends React.Component {
                 <strong> {(this.state.totaldivbalance / 7).toFixed(4)} </strong>
                 <br />
               </Typography>
-              <Typography variant="headline" variant="caption">
+              <Typography variant="caption">
                 USD:{" "}
                 {(
                   (this.state.totaldivbalance / 7).toFixed(4) *
@@ -885,7 +885,7 @@ class App extends React.Component {
                 €
               </Typography>
               <hr style={{ height: 1 }} />
-              <Typography variant="headline" variant="caption">
+              <Typography variant="caption">
                 Dividendi su calcolo Totale esclusa la riserva per progetti
               </Typography>
               <Typography
@@ -906,7 +906,7 @@ class App extends React.Component {
                 </strong>
                 <br />
               </Typography>
-              <Typography variant="headline" variant="caption">
+              <Typography variant="caption">
                 USD:{" "}
                 {(
                   (
@@ -1044,7 +1044,11 @@ class App extends React.Component {
           Il prezzo di TLOS/EOS proviene da Chainrift <br />
           <br />
           Version 1.11 -{" "}
-          <a href="https://github.com/tarabaz/EOSIMPERA-traker" target="_blank">
+          <a
+            href="https://github.com/tarabaz/EOSIMPERA-traker"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <strong>Github</strong>
           </a>
         </Typography>
