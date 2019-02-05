@@ -1,3 +1,4 @@
+
 import React from "react";
 //import Async from "react-async"
 //import { CheckAccount} from "./EosCore";
@@ -547,513 +548,522 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <div align="center">
-          <img
-            src="/images/htmlheadmail.png"
+     <div>
+
+
+
+          <div align="center">
+            <img
+              src="/images/htmlheadmail.png"
+              align="center"
+              alt="loading"
+              style={{
+                // marginLeft: '-10px',
+                position: "relative",
+                //flexGrow: 1,
+
+                width: "50%"
+
+                //margin: '0px',
+                //borderRadius: 15
+              }}
+            />
+          </div>
+
+          <Grid container spacing={24} direction="row">
+            <Grid item xs={6} sm={6}>
+              <Paper
+                style={{
+                  ...style.Paper2,
+                  topMargin: 10
+                  //  height: 320
+                }}
+                elevation={10}
+              >
+                <Typography
+                  component="p"
+                  align="left"
+                  style={{
+                    color: "white",
+                    topMargin: -10
+                  }}
+                >
+                  EOS/USD: <strong> {this.state.eosPriceUSD}$</strong>
+                  <br />
+                  TLOS/EOS: <strong> {this.state.tlosEOS.toFixed(4)} </strong>
+                  <br />
+                  TLOS/USD:{" "}
+                  <strong>
+                    {" "}
+                    {(this.state.eosPriceUSD * this.state.tlosEOS).toFixed(3)}$
+                </strong>
+                  <br />
+                </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={6} sm={6}>
+              <Paper
+                style={{
+                  ...style.Paper2,
+                  topMargin: 10
+                  //  height: 320
+                }}
+                elevation={10}
+              >
+                <Typography
+                  component="p"
+                  align="left"
+                  style={{
+                    color: "white",
+                    topMargin: -10
+                  }}
+                >
+                  EOS/USD: <strong> {this.state.eosPriceEUR}€</strong>
+                  <br />
+                  TLOS/EOS: <strong> {this.state.tlosEOS.toFixed(4)} </strong>
+                  <br />
+                  TLOS/USD:{" "}
+                  <strong>
+                    {" "}
+                    {(this.state.tlosEOS * this.state.eosPriceEUR).toFixed(3)}€
+                </strong>
+                  <br />
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={24} direction="row">
+            <Grid item xs={12} sm={4}>
+              <Paper
+                style={{
+                  ...style.Paper,
+                  topMargin: 10
+                  //  height: 320
+                }}
+                elevation={10}
+              >
+                <Typography variant="caption">Account:</Typography>
+                <Typography variant="h6">
+                  {BPACCOUNTNAME.toUpperCase()}
+                </Typography>
+                <Typography component="p">
+                  Liquid: <strong>{this.state.bpbalance}</strong>
+                  <br />
+                  Staked CPU: <strong>{this.state.bpcpu}</strong>
+                  <br />
+                  Staked BAN: <strong> {this.state.bpban}</strong>
+                  <br />
+                </Typography>
+                <Typography variant="caption">
+                  Unstake: <strong> {this.state.bpUnstake}</strong> TLOS
+              </Typography>
+                <hr
+                  style={{
+                    //     color: red,
+                    //     backgroundColor: color,
+                    height: 1
+                  }}
+                />
+                <Typography variant="h6">
+                  <strong>{this.state.totalbpbalance.toFixed(4)}</strong> Telos
+              </Typography>
+                <Typography variant="caption">
+                  <strong>
+                    {(
+                      this.state.totalbpbalance *
+                      this.state.tlosEOS *
+                      this.state.eosPriceUSD
+                    ).toFixed(2)}
+                  </strong>{" "}
+                  $ -{" "}
+                  <strong>
+                    {(
+                      this.state.totalbpbalance *
+                      this.state.tlosEOS *
+                      this.state.eosPriceEUR
+                    ).toFixed(2)}
+                  </strong>{" "}
+                  €
+              </Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Paper
+                style={{
+                  ...style.Paper,
+                  //  height: 320
+                  topMargin: 10
+                }}
+                elevation={10}
+              >
+                <Typography variant="caption">Account:</Typography>
+                <Typography variant="h6">
+                  {DIVACCOUNTNAME.toUpperCase()}
+                </Typography>
+                <Typography component="p">
+                  Liquid: <strong> {this.state.divbalance}</strong>
+                  <br />
+                  Staked CPU: <strong> {this.state.divcpu}</strong>
+                  <br />
+                  Staked BAN: <strong>{this.state.divban}</strong>
+                  <br />
+                </Typography>
+                <Typography variant="caption">
+                  Unstake: <strong> {this.state.divUnstake}</strong> TLOS
+              </Typography>
+                <hr
+                  style={{
+                    //     color: red,
+                    //     backgroundColor: color,
+                    height: 1
+                  }}
+                />
+                <Typography variant="h6">
+                  <strong>{this.state.totaldivbalance.toFixed(4)}</strong> Telos
+              </Typography>
+                <Typography variant="caption">
+                  <strong>
+                    {(
+                      this.state.totaldivbalance *
+                      this.state.tlosEOS *
+                      this.state.eosPriceUSD
+                    ).toFixed(2)}
+                  </strong>{" "}
+                  $ - {" "}
+                  <strong>
+                    {(
+                      this.state.totaldivbalance *
+                      this.state.tlosEOS *
+                      this.state.eosPriceEUR
+                    ).toFixed(2)}
+                  </strong>{" "}
+                  €
+              </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <Paper
+                style={{
+                  ...style.Paper,
+                  //  height: 320
+                  topMargin: 10
+                }}
+                elevation={10}
+              >
+                <Typography variant="caption">Account:</Typography>
+                <Typography variant="h6">
+                  {PROACCOUNTNAME.toUpperCase()}
+                </Typography>
+                <Typography component="p">
+                  Liquid: <strong> {this.state.probalance}</strong>
+                  <br />
+                  Staked CPU: <strong>{this.state.procpu}</strong>
+                  <br />
+                  Staked BAN: <strong>{this.state.proban}</strong>
+                  <br />
+                </Typography>
+                <Typography variant="caption">
+                  Unstake: <strong> {this.state.proUnstake}</strong> TLOS
+              </Typography>
+                <hr
+                  style={{
+                    //     color: red,
+                    //     backgroundColor: color,
+                    height: 1
+                  }}
+                />
+                <Typography variant="h6">
+                  <strong>{this.state.totalprobalance.toFixed(4)}</strong> Telos
+              </Typography>
+                <Typography variant="caption">
+                  <strong>
+                    {(
+                      this.state.totalprobalance *
+                      this.state.tlosEOS *
+                      this.state.eosPriceUSD
+                    ).toFixed(2)}
+                  </strong>{" "}
+                  $ -{" "}
+                  <strong>
+                    {(
+                      this.state.totalprobalance *
+                      this.state.tlosEOS *
+                      this.state.eosPriceEUR
+                    ).toFixed(2)}
+                  </strong>{" "}
+                  €
+              </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={24} direction="row">
+            <Grid item xs={12} sm={6}>
+              <Paper
+                style={{
+                  ...style.Paper3,
+                  topMargin: 10
+                  //  height: 320
+                }}
+                elevation={10}
+              >
+                <Typography variant="h6">
+                  <strong>Block Producer Stats</strong>
+                </Typography>
+                <hr style={{ height: 1 }} />
+
+                <Typography
+                  component="p"
+                  align="center"
+                  style={{
+                    color: "black",
+                    topMargin: -10
+                  }}
+                >
+                  Lifetime Produced Block:{" "}
+                  <strong> {this.state.bpBlockProduced} </strong>
+                  <br />
+                  Missed Block per Rotation:{" "}
+                  <strong> {this.state.bpMissedBlockRotation} </strong>
+                  <br />
+                  Lifetime Missed Block:{" "}
+                  <strong> {this.state.bpMissedBlock} </strong>
+                  <br />
+                  Votes: <strong> {this.state.bpVotes} </strong>
+                  <br />
+                  Position: <strong> {this.state.bpPosition}° </strong>
+                  <br />
+                  Unpaid Block: <strong> {this.state.bpUnpaid} </strong>
+                  <br />
+                </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Paper
+                style={{
+                  ...style.Paper3,
+                  topMargin: 10
+                  //  height: 320
+                }}
+                elevation={10}
+              >
+                <Typography variant="body1">
+                  <strong>Dividendi</strong>
+                </Typography>
+                <Typography variant="caption">
+                  I dividendi sono calcolati sul totale diviso 7
+              </Typography>
+                <hr style={{ height: 1 }} />
+                <Typography variant="caption">
+                  Dividendi del wallet IMPERADIVIDS
+              </Typography>
+                <Typography
+                  component="p"
+                  align="center"
+                  style={{
+                    color: "black",
+                    topMargin: -10
+                  }}
+                >
+                  TELOS:{" "}
+                  <strong> {(this.state.totaldivbalance / 7).toFixed(4)} </strong>
+                  <br />
+                </Typography>
+                <Typography variant="caption">
+                  USD:{" "}
+                  {(
+                    (this.state.totaldivbalance / 7).toFixed(4) *
+                    this.state.tlosEOS *
+                    this.state.eosPriceUSD
+                  ).toFixed(2)}
+                  $ - EUR:{" "}
+                  {(
+                    (this.state.totaldivbalance / 7).toFixed(4) *
+                    this.state.tlosEOS *
+                    this.state.eosPriceEUR
+                  ).toFixed(2)}
+                  €
+              </Typography>
+                <hr style={{ height: 1 }} />
+                <Typography variant="caption">
+                  Dividendi su calcolo Totale esclusa la riserva per progetti
+              </Typography>
+                <Typography
+                  component="p"
+                  align="center"
+                  style={{
+                    color: "black",
+                    topMargin: -10
+                  }}
+                >
+                  TELOS:{" "}
+                  <strong>
+                    {" "}
+                    {(
+                      (this.state.totaldivbalance + this.state.totalbpbalance) /
+                      7
+                    ).toFixed(4)}{" "}
+                  </strong>
+                  <br />
+                </Typography>
+                <Typography variant="caption">
+                  USD:{" "}
+                  {(
+                    (
+                      (this.state.totaldivbalance + this.state.totalbpbalance) /
+                      7
+                    ).toFixed(4) *
+                    this.state.tlosEOS *
+                    this.state.eosPriceUSD
+                  ).toFixed(2)}
+                  $ - EUR:{" "}
+                  {(
+                    (
+                      (this.state.totaldivbalance + this.state.totalbpbalance) /
+                      7
+                    ).toFixed(4) *
+                    this.state.tlosEOS *
+                    this.state.eosPriceEUR
+                  ).toFixed(2)}
+                  €
+              </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={24} direction="row">
+            <Grid item xs={12} sm={12}>
+              <Paper
+                style={{
+                  ...style.Paper2,
+                  topMargin: 10
+                  //  height: 320
+                }}
+                elevation={10}
+              >
+                <Typography
+                  variant="headline"
+                  variant="caption"
+                  style={{
+                    color: "white",
+                    topMargin: -10
+                  }}
+                >
+                  Capitalizzazione Totale
+              </Typography>
+                <Typography
+                  component="p"
+                  align="left"
+                  style={{
+                    color: "white",
+                    topMargin: -10
+                  }}
+                >
+                  USD:{" "}
+                  <strong>
+                    {" "}
+                    {(
+                      this.state.eosPriceUSD *
+                      this.state.tlosEOS *
+                      (this.state.totalbpbalance +
+                        this.state.totaldivbalance +
+                        this.state.totalprobalance)
+                    ).toFixed(2)}{" "}
+                  </strong>
+                  $<br />
+                  EUR:{" "}
+                  <strong>
+                    {" "}
+                    {(
+                      this.state.eosPriceEUR *
+                      this.state.tlosEOS *
+                      (this.state.totalbpbalance +
+                        this.state.totaldivbalance +
+                        this.state.totalprobalance)
+                    ).toFixed(2)}{" "}
+                  </strong>
+                  €<br />
+                  TLOS:{" "}
+                  <strong>
+                    {" "}
+                    {(
+                      this.state.totalbpbalance +
+                      this.state.totaldivbalance +
+                      this.state.totalprobalance
+                    ).toFixed(4)}{" "}
+                  </strong>
+                  <br />
+                  EOS:{" "}
+                  <strong>
+                    {" "}
+                    {(
+                      (this.state.totalbpbalance +
+                        this.state.totaldivbalance +
+                        this.state.totalprobalance) *
+                      this.state.tlosEOS
+                    ).toFixed(4)}{" "}
+                  </strong>
+                  <br />
+                  BTC:{" "}
+                  <strong>
+                    {" "}
+                    {(
+                      (this.state.totalbpbalance +
+                        this.state.totaldivbalance +
+                        this.state.totalprobalance) *
+                      (this.state.tlosEOS * this.state.eosPriceBTC)
+                    ).toFixed(10)}{" "}
+                  </strong>
+                  <br />
+                  ETH:{" "}
+                  <strong>
+                    {" "}
+                    {(
+                      (this.state.totalbpbalance +
+                        this.state.totaldivbalance +
+                        this.state.totalprobalance) *
+                      (this.state.tlosEOS * this.state.eosPriceETH)
+                    ).toFixed(10)}{" "}
+                  </strong>
+                  <br />
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+
+
+          <Typography
+            variant="headline"
+            variant="caption"
             align="center"
-            alt="loading"
             style={{
-              // marginLeft: '-10px',
-              position: "relative",
-              //flexGrow: 1,
-
-              width: "50%"
-
-              //margin: '0px',
-              //borderRadius: 15
+              color: "black",
+              padding: 10
             }}
-          />
-        </div>
-
-        <Grid container spacing={24} direction="row">
-          <Grid item xs={6} sm={6}>
-            <Paper
-              style={{
-                ...style.Paper2,
-                topMargin: 10
-                //  height: 320
-              }}
-              elevation={10}
-            >
-              <Typography
-                component="p"
-                align="left"
-                style={{
-                  color: "white",
-                  topMargin: -10
-                }}
-              >
-                EOS/USD: <strong> {this.state.eosPriceUSD}$</strong>
-                <br />
-                TLOS/EOS: <strong> {this.state.tlosEOS.toFixed(4)} </strong>
-                <br />
-                TLOS/USD:{" "}
-                <strong>
-                  {" "}
-                  {(this.state.eosPriceUSD * this.state.tlosEOS).toFixed(3)}$
-                </strong>
-                <br />
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6} sm={6}>
-            <Paper
-              style={{
-                ...style.Paper2,
-                topMargin: 10
-                //  height: 320
-              }}
-              elevation={10}
-            >
-              <Typography
-                component="p"
-                align="left"
-                style={{
-                  color: "white",
-                  topMargin: -10
-                }}
-              >
-                EOS/USD: <strong> {this.state.eosPriceEUR}€</strong>
-                <br />
-                TLOS/EOS: <strong> {this.state.tlosEOS.toFixed(4)} </strong>
-                <br />
-                TLOS/USD:{" "}
-                <strong>
-                  {" "}
-                  {(this.state.tlosEOS * this.state.eosPriceEUR).toFixed(3)}€
-                </strong>
-                <br />
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={24} direction="row">
-          <Grid item xs={12} sm={4}>
-            <Paper
-              style={{
-                ...style.Paper,
-                topMargin: 10
-                //  height: 320
-              }}
-              elevation={10}
-            >
-              <Typography variant="caption">Account:</Typography>
-              <Typography variant="h6">
-                {BPACCOUNTNAME.toUpperCase()}
-              </Typography>
-              <Typography component="p">
-                Liquid: <strong>{this.state.bpbalance}</strong>
-                <br />
-                Staked CPU: <strong>{this.state.bpcpu}</strong>
-                <br />
-                Staked BAN: <strong> {this.state.bpban}</strong>
-                <br />
-              </Typography>
-              <Typography variant="caption">
-                Unstake: <strong> {this.state.bpUnstake}</strong> TLOS
-              </Typography>
-              <hr
-                style={{
-                  //     color: red,
-                  //     backgroundColor: color,
-                  height: 1
-                }}
-              />
-              <Typography variant="h6">
-                <strong>{this.state.totalbpbalance.toFixed(4)}</strong> Telos
-              </Typography>
-              <Typography variant="caption">
-                <strong>
-                  {(
-                    this.state.totalbpbalance *
-                    this.state.tlosEOS *
-                    this.state.eosPriceUSD
-                  ).toFixed(2)}
-                </strong>{" "}
-                $ -{" "}
-                <strong>
-                  {(
-                    this.state.totalbpbalance *
-                    this.state.tlosEOS *
-                    this.state.eosPriceEUR
-                  ).toFixed(2)}
-                </strong>{" "}
-                €
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Paper
-              style={{
-                ...style.Paper,
-                //  height: 320
-                topMargin: 10
-              }}
-              elevation={10}
-            >
-              <Typography variant="caption">Account:</Typography>
-              <Typography variant="h6">
-                {DIVACCOUNTNAME.toUpperCase()}
-              </Typography>
-              <Typography component="p">
-                Liquid: <strong> {this.state.divbalance}</strong>
-                <br />
-                Staked CPU: <strong> {this.state.divcpu}</strong>
-                <br />
-                Staked BAN: <strong>{this.state.divban}</strong>
-                <br />
-              </Typography>
-              <Typography variant="caption">
-                Unstake: <strong> {this.state.divUnstake}</strong> TLOS
-              </Typography>
-              <hr
-                style={{
-                  //     color: red,
-                  //     backgroundColor: color,
-                  height: 1
-                }}
-              />
-              <Typography variant="h6">
-                <strong>{this.state.totaldivbalance.toFixed(4)}</strong> Telos
-              </Typography>
-              <Typography variant="caption">
-                <strong>
-                  {(
-                    this.state.totaldivbalance *
-                    this.state.tlosEOS *
-                    this.state.eosPriceUSD
-                  ).toFixed(2)}
-                </strong>{" "}
-                $ -{" "}
-                <strong>
-                  {(
-                    this.state.totaldivbalance *
-                    this.state.tlosEOS *
-                    this.state.eosPriceEUR
-                  ).toFixed(2)}
-                </strong>{" "}
-                €
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <Paper
-              style={{
-                ...style.Paper,
-                //  height: 320
-                topMargin: 10
-              }}
-              elevation={10}
-            >
-              <Typography variant="caption">Account:</Typography>
-              <Typography variant="h6">
-                {PROACCOUNTNAME.toUpperCase()}
-              </Typography>
-              <Typography component="p">
-                Liquid: <strong> {this.state.probalance}</strong>
-                <br />
-                Staked CPU: <strong>{this.state.procpu}</strong>
-                <br />
-                Staked BAN: <strong>{this.state.proban}</strong>
-                <br />
-              </Typography>
-              <Typography variant="caption">
-                Unstake: <strong> {this.state.proUnstake}</strong> TLOS
-              </Typography>
-              <hr
-                style={{
-                  //     color: red,
-                  //     backgroundColor: color,
-                  height: 1
-                }}
-              />
-              <Typography variant="h6">
-                <strong>{this.state.totalprobalance.toFixed(4)}</strong> Telos
-              </Typography>
-              <Typography variant="caption">
-                <strong>
-                  {(
-                    this.state.totalprobalance *
-                    this.state.tlosEOS *
-                    this.state.eosPriceUSD
-                  ).toFixed(2)}
-                </strong>{" "}
-                $ -{" "}
-                <strong>
-                  {(
-                    this.state.totalprobalance *
-                    this.state.tlosEOS *
-                    this.state.eosPriceEUR
-                  ).toFixed(2)}
-                </strong>{" "}
-                €
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={24} direction="row">
-          <Grid item xs={12} sm={6}>
-            <Paper
-              style={{
-                ...style.Paper3,
-                topMargin: 10
-                //  height: 320
-              }}
-              elevation={10}
-            >
-              <Typography variant="h6">
-                <strong>Block Producer Stats</strong>
-              </Typography>
-              <hr style={{ height: 1 }} />
-
-              <Typography
-                component="p"
-                align="center"
-                style={{
-                  color: "black",
-                  topMargin: -10
-                }}
-              >
-                Lifetime Produced Block:{" "}
-                <strong> {this.state.bpBlockProduced} </strong>
-                <br />
-                Missed Block per Rotation:{" "}
-                <strong> {this.state.bpMissedBlockRotation} </strong>
-                <br />
-                Lifetime Missed Block:{" "}
-                <strong> {this.state.bpMissedBlock} </strong>
-                <br />
-                Votes: <strong> {this.state.bpVotes} </strong>
-                <br />
-                Position: <strong> {this.state.bpPosition}° </strong>
-                <br />
-                Unpaid Block: <strong> {this.state.bpUnpaid} </strong>
-                <br />
-              </Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <Paper
-              style={{
-                ...style.Paper3,
-                topMargin: 10
-                //  height: 320
-              }}
-              elevation={10}
-            >
-              <Typography variant="body1">
-                <strong>Dividendi</strong>
-              </Typography>
-              <Typography variant="caption">
-                I dividendi sono calcolati sul totale diviso 7
-              </Typography>
-              <hr style={{ height: 1 }} />
-              <Typography v variant="caption">
-                Dividendi del wallet IMPERADIVIDS
-              </Typography>
-              <Typography
-                component="p"
-                align="center"
-                style={{
-                  color: "black",
-                  topMargin: -10
-                }}
-              >
-                TELOS:{" "}
-                <strong> {(this.state.totaldivbalance / 7).toFixed(4)} </strong>
-                <br />
-              </Typography>
-              <Typography variant="caption">
-                USD:{" "}
-                {(
-                  (this.state.totaldivbalance / 7).toFixed(4) *
-                  this.state.tlosEOS *
-                  this.state.eosPriceUSD
-                ).toFixed(2)}
-                $ - EUR:{" "}
-                {(
-                  (this.state.totaldivbalance / 7).toFixed(4) *
-                  this.state.tlosEOS *
-                  this.state.eosPriceEUR
-                ).toFixed(2)}
-                €
-              </Typography>
-              <hr style={{ height: 1 }} />
-              <Typography variant="caption">
-                Dividendi su calcolo Totale esclusa la riserva per progetti
-              </Typography>
-              <Typography
-                component="p"
-                align="center"
-                style={{
-                  color: "black",
-                  topMargin: -10
-                }}
-              >
-                TELOS:{" "}
-                <strong>
-                  {" "}
-                  {(
-                    (this.state.totaldivbalance + this.state.totalbpbalance) /
-                    7
-                  ).toFixed(4)}{" "}
-                </strong>
-                <br />
-              </Typography>
-              <Typography variant="caption">
-                USD:{" "}
-                {(
-                  (
-                    (this.state.totaldivbalance + this.state.totalbpbalance) /
-                    7
-                  ).toFixed(4) *
-                  this.state.tlosEOS *
-                  this.state.eosPriceUSD
-                ).toFixed(2)}
-                $ - EUR:{" "}
-                {(
-                  (
-                    (this.state.totaldivbalance + this.state.totalbpbalance) /
-                    7
-                  ).toFixed(4) *
-                  this.state.tlosEOS *
-                  this.state.eosPriceEUR
-                ).toFixed(2)}
-                €
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={24} direction="row">
-          <Grid item xs={12} sm={12}>
-            <Paper
-              style={{
-                ...style.Paper2,
-                topMargin: 10
-                //  height: 320
-              }}
-              elevation={10}
-            >
-              <Typography
-                variant="headline"
-                variant="caption"
-                style={{
-                  color: "white",
-                  topMargin: -10
-                }}
-              >
-                Capitalizzazione Totale
-              </Typography>
-              <Typography
-                component="p"
-                align="left"
-                style={{
-                  color: "white",
-                  topMargin: -10
-                }}
-              >
-                USD:{" "}
-                <strong>
-                  {" "}
-                  {(
-                    this.state.eosPriceUSD *
-                    this.state.tlosEOS *
-                    (this.state.totalbpbalance +
-                      this.state.totaldivbalance +
-                      this.state.totalprobalance)
-                  ).toFixed(2)}{" "}
-                </strong>
-                $<br />
-                EUR:{" "}
-                <strong>
-                  {" "}
-                  {(
-                    this.state.eosPriceEUR *
-                    this.state.tlosEOS *
-                    (this.state.totalbpbalance +
-                      this.state.totaldivbalance +
-                      this.state.totalprobalance)
-                  ).toFixed(2)}{" "}
-                </strong>
-                €<br />
-                TLOS:{" "}
-                <strong>
-                  {" "}
-                  {(
-                    this.state.totalbpbalance +
-                    this.state.totaldivbalance +
-                    this.state.totalprobalance
-                  ).toFixed(4)}{" "}
-                </strong>
-                <br />
-                EOS:{" "}
-                <strong>
-                  {" "}
-                  {(
-                    (this.state.totalbpbalance +
-                      this.state.totaldivbalance +
-                      this.state.totalprobalance) *
-                    this.state.tlosEOS
-                  ).toFixed(4)}{" "}
-                </strong>
-                <br />
-                BTC:{" "}
-                <strong>
-                  {" "}
-                  {(
-                    (this.state.totalbpbalance +
-                      this.state.totaldivbalance +
-                      this.state.totalprobalance) *
-                    (this.state.tlosEOS * this.state.eosPriceBTC)
-                  ).toFixed(10)}{" "}
-                </strong>
-                <br />
-                ETH:{" "}
-                <strong>
-                  {" "}
-                  {(
-                    (this.state.totalbpbalance +
-                      this.state.totaldivbalance +
-                      this.state.totalprobalance) *
-                    (this.state.tlosEOS * this.state.eosPriceETH)
-                  ).toFixed(10)}{" "}
-                </strong>
-                <br />
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
-        <Typography
-          variant="headline"
-          variant="caption"
-          align="center"
-          style={{
-            color: "black",
-            padding: 10
-          }}
-        >
-          I prezzi di EOS/USD - BTC/USD - ETH/USD provengono da Cryptocompare
-          <br />
-          Il prezzo di TLOS/EOS proviene da Chainrift <br />
-          <br />
-          Version 1.11 -{" "}
-          <a
-            href="https://github.com/tarabaz/EOSIMPERA-traker"
-            rel="noopener noreferrer"
-            target="_blank"
           >
-            <strong>Github</strong>
-          </a>
-        </Typography>
-      </div>
+            I prezzi di EOS/USD - BTC/USD - ETH/USD provengono da Cryptocompare
+          <br />
+            Il prezzo di TLOS/EOS proviene da Chainrift <br />
+            <br />
+            Version 1.11 -{" "}
+            <a
+              href="https://github.com/tarabaz/EOSIMPERA-traker"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <strong>Github</strong>
+            </a>
+          </Typography>
+
+
+
+          </div>
     );
   }
 }
 export default App;
+
